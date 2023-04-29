@@ -1,6 +1,5 @@
 import React from 'react'
 import './Navbar.css'
-import { Search } from '@mui/icons-material';
 
 export default function Navbar() {
     return (
@@ -9,13 +8,16 @@ export default function Navbar() {
             <div className="input-field">
                 <input placeholder={'Search Amazon'} type="search" name="" id="" />
                 <button>
-                    <svg dataTestid={Search}></svg>
+                    <img src="img/search_FILL0_wght400_GRAD0_opsz48.svg" alt="" />
                 </button>
             </div>
             <span>Sign in</span>
             <span>Returns & Orders</span>
-            <button>
-                <img src="img/shopping_cart_FILL0_wght400_GRAD0_opsz48.svg" alt="not found" />
+            <button className='cart'>
+                <div>
+                    <span style={{color: 'orange', fontSize:17}}>0</span>
+                <img src="img/shopping_cart_FILL0_wght400_GRAD0_opsz48.svg" alt="" />
+                </div>
                 <span>Cart</span>
             </button>
         </header>

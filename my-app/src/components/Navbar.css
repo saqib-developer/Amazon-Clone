@@ -1,11 +1,11 @@
 header {
     background-color: #131921;
     color: white;
-    padding: 17px;
+    padding: 3px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-around;
 }
 
 .top-logo img {
@@ -44,4 +44,15 @@ header {
 
 .input-field img {
     height: 33px;
+}
+
+.cart{
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.cart div{
+    display: flex;
+    flex-direction: column;
 }

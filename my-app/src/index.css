@@ -12,7 +12,23 @@ code {
     monospace;
 }
 
+h3 {
+  margin: 0 3px;
+}
+
+a {
+  text-decoration: none;
+  color: #007185;
+}
+
+a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #C7511F;
+}
+
 button {
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
