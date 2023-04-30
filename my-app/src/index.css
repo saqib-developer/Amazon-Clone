@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+h2{
+  font-weight: 600;
+  margin: 4px 0;
+}
+
 h3 {
   margin: 0 3px;
 }

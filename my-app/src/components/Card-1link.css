@@ -1,0 +1,19 @@
+.Card1link {
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    box-shadow: 0 0 5px #b0b0b0;
+    border-radius: 7px;
+}
+
+.card img {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.Card1link a {
+    font-size: 0.75em;
+    margin: 10px 0;
+}
