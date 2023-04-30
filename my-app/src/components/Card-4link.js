@@ -6,24 +6,24 @@ export default function Card4link(props) {
         <div className='card4link'>
             <h2>{props.title}</h2>
             <div className='row'>
-                <a href='*' className='coloumn'>
-                    <img src={props.src1} alt="" />
+                <div href='*' className='coloumn'>
+                    <img src={`img/gadgets/${props.name1}.jpg`} alt="" />
                     <span>{props.name1}</span>
-                </a>
-                <a href='*' className='coloumn'>
-                    <img src={props.src2} alt="" />
+                </div>
+                <div href='*' className='coloumn'>
+                    <img src={`img/gadgets/${props.name2}.jpg`} alt="" />
                     <span>{props.name2}</span>
-                </a>
+                </div>
             </div>
             <div  className='row'>
-                <a href='*' className='coloumn'>
-                    <img src={props.src3} alt="" />
+                <div href='*' className='coloumn'>
+                    <img src={`img/gadgets/${props.name3}.jpg`} alt="" />
                     <span>{props.name3}</span>
-                </a>
-                <a href='*' className='coloumn'>
-                    <img src={props.src4} alt="" />
+                </div>
+                <div href='*' className='coloumn'>
+                    <img src={`img/gadgets/${props.name4}.jpg`} alt="" />
                     <span>{props.name4}</span>
-                </a>
+                </div>
             </div>
             <a href="*">See More</a>
         </div>

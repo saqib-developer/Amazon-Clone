@@ -26,12 +26,10 @@
 .next {
     position: relative;
     color: black;
-    font-size: 5em;
     height: 193px;
     width: 6%;
     min-width: 74px;
     border-radius: 6px;
-    text-shadow: 5px 0px 0px #d8d8d8;
 }
 
 .prev:focus,
@@ -41,5 +39,5 @@
 
 .prev:hover,
 .next:hover {
-    background: #e2e2e21c;
+    background: #9494943f;
 }

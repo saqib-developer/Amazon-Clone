@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './ImgSlider.css'
+import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
+import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 
 export default function ImgSlider(props) {
     const images = props.images;
@@ -31,8 +33,8 @@ export default function ImgSlider(props) {
         <div className="image-slider">
             <img src={images[currentImageIndex]} alt="slider" />
             <div className="prv-nxt-btn">
-                <button className="prev" onClick={handlePrevious}>&#10094;</button>
-                <button className="next" onClick={handleNext}>&#10095;</button>
+                <button className="prev" onClick={handlePrevious}><ArrowBackIosRoundedIcon style={{ fontSize: '5em' }} /></button>
+                <button className="next" onClick={handleNext}><ArrowForwardIosRoundedIcon style={{ fontSize: '5em' }} /></button>
             </div>
         </div>
     );

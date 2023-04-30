@@ -47,15 +47,11 @@ header a:hover{
 .input-field button {
     background-color: #febd69;
     border-radius: 4px;
-    transform: translateX(-44px);
+    transform: translateX(-43px);
 }
 
 .input-field button:hover {
     background-color: #f0a543;
-}
-
-.input-field img {
-    height: 33px;
 }
 
 .cart{
