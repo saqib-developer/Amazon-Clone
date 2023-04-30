@@ -1,11 +1,24 @@
 header {
     background-color: #131921;
     color: white;
-    padding: 3px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    padding: 2px;
+}
+
+header a{
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+header a:hover{
+    color: white;
+    text-decoration: none;
+    border: 1px solid white;
 }
 
 .top-logo img {
@@ -13,7 +26,6 @@ header {
 }
 
 .input-field {
-    margin: 0 27px;
     display: flex;
     flex-direction: row;
     align-items: center;

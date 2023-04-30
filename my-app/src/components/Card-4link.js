@@ -8,21 +8,21 @@ export default function Card4link(props) {
             <div className='row'>
                 <a href='*' className='coloumn'>
                     <img src={props.src1} alt="" />
-                    <span>Headsets</span>
+                    <span>{props.name1}</span>
                 </a>
                 <a href='*' className='coloumn'>
                     <img src={props.src2} alt="" />
-                    <span>Keyboards</span>
+                    <span>{props.name2}</span>
                 </a>
             </div>
             <div  className='row'>
                 <a href='*' className='coloumn'>
                     <img src={props.src3} alt="" />
-                    <span>Chairs</span>
+                    <span>{props.name3}</span>
                 </a>
                 <a href='*' className='coloumn'>
                     <img src={props.src4} alt="" />
-                    <span>CPU</span>
+                    <span>{props.name4}</span>
                 </a>
             </div>
             <a href="*">See More</a>
