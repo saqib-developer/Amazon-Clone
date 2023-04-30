@@ -9,7 +9,7 @@ export default function Footer() {
         <footer>
             <button onClick={toTop}>Back to top</button>
             <div className='sec1'>
-                <div className="row" style={{margin: 0}}>
+                <div className="row" style={{ margin: 0 }}>
                     <div className="column">
                         <b>Get to Know Us</b>
                         <br />
@@ -65,7 +65,7 @@ export default function Footer() {
                 <a className='top-logo' href="*"><img src="img/amazon-logo-wob.png" alt="amazon logo" /></a>
             </div>
             <div className='sec2'>
-                <p style={{margin: '0 0 16px 0'}}>This is an amazon Clone made just for Practice and Fun Purposes</p>
+                <p style={{ margin: '0 0 16px 0' }}>This is an amazon Clone made just for Practice and Fun Purposes</p>
                 <a className='top-logo' href="*"><img src="img/amazon-logo-wob.png" alt="amazon logo" /></a>
             </div>
         </footer>

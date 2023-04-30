@@ -51,3 +51,7 @@ button {
 input{
   font-family: 'PT Sans', sans-serif;
 }
+
+input:focus{
+  outline: none;
+}
