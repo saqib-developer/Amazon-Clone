@@ -23,6 +23,7 @@ form {
     border-radius: 7px;
     background: white;
     padding: 7px 34px;
+    width: 270px;
 }
 
 .signin label {
@@ -69,7 +70,7 @@ form {
     text-decoration: none;
 }
 
-.footer{
+.footer {
     background-color: #f6f6f6;
     width: 100%;
     height: 69px;
