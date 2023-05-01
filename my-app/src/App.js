@@ -20,6 +20,13 @@ import {
   onAuthStateChanged,
   signOut
 } from 'firebase/auth';
+import {
+  getDatabase,
+  ref,
+  get,
+  set
+} from 'firebase/database';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -40,6 +47,8 @@ function App() {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app)
+  const db = getDatabase(app);
+
   const sliderImages = [
     'img/sliderimages/1.jpg',
     'img/sliderimages/2.jpg',
@@ -77,11 +86,23 @@ function App() {
 
   const createAccount = async (event) => {
     event.preventDefault();
+    const signinName = document.getElementById('loginname').value
     const signinEmail = document.getElementById('loginemail').value
     const signinPassword = document.getElementById('loginpassword').value
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, signinEmail, signinPassword)
-      console.log(userCredential.user)
+
+      set(ref(db, 'users/' + userCredential.user.uid), {
+        name: signinName,
+        email: signinEmail
+      })
+        .then(() => {
+          console.log('User data successfully saved')
+        })
+        .catch((error) => {
+          console.log('error: ' + error)
+        });
+
       window.location.href = '/';
     } catch (error) {
       console.log(error);
