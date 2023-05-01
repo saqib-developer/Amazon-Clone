@@ -30,7 +30,7 @@ export default function Login(props) {
                 <span style={{ color: 'red' }} id="showError"></span>
 
                 <button type='submit'>Continue</button>
-                <p>This is an Amazon Clone made for Practice and <br />Fun purposes only!</p>
+                <p>This is an Amazon Clone made for Practice and Fun purposes only!</p>
             </div>
             {
                 props.purpose === 'Sign in' ?

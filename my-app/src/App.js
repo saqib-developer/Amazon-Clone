@@ -1,4 +1,5 @@
 import './App.css';
+import { useState } from 'react'
 import {
   BrowserRouter as Router,
   Routes,
@@ -26,6 +27,7 @@ import {
   get,
   set
 } from 'firebase/database';
+import SellSomething from './components/SellSomething';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -109,12 +111,18 @@ function App() {
       showLoginError(error);
     }
   }
-
+  const [name, setName] = useState('Sign in')
   const monitorAuthState = async () => {
     onAuthStateChanged(auth, user => {
       if (user) {
         console.log(user)
+        get(ref(db, 'users/' + user.uid)).then((snapshot) => {
+          setName(snapshot.val().name)
+        }).catch((error) => {
+          console.error(error);
+        });
       } else {
+        setName('Sign in')
         console.log('You are not Logged in.')
       }
     })
@@ -129,7 +137,7 @@ function App() {
 
       <Routes >
         <Route exact path="/" element={<>
-          <Navbar logout={logout} />
+          <Navbar logout={logout} name={name} />
           <ImgSlider images={sliderImages} />
           <div className='body'>
             <div className="row">
@@ -165,6 +173,9 @@ function App() {
         </>} />
         <Route path="/signup" element={<>
           <Login purpose={'Create Account'} account={createAccount} />
+        </>} />
+        <Route path="/sellsomething" element={<>
+          <SellSomething/>
         </>} />
       </Routes >
     </Router >

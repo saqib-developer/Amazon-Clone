@@ -62,11 +62,11 @@ export default function Footer() {
                 </div>
                 <hr />
                 <p>This is an amazon Clone made just for Practice and Fun Purposes.</p>
-                <a className='top-logo' href="*"><img src="img/amazon-logo-wob.png" alt="amazon logo" /></a>
+                <a className='top-logo' href="/"><img src="img/amazon-logo-wob.png" alt="amazon logo" /></a>
             </div>
             <div className='sec2'>
                 <p style={{ margin: '0 0 16px 0' }}>This is an amazon Clone made just for Practice and Fun Purposes</p>
-                <a className='top-logo' href="*"><img src="img/amazon-logo-wob.png" alt="amazon logo" /></a>
+                <a className='top-logo' href="/"><img src="img/amazon-logo-wob.png" alt="amazon logo" /></a>
             </div>
         </footer>
     )
