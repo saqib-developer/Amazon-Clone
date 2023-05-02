@@ -50,6 +50,7 @@ function App() {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app)
   const db = getDatabase(app);
+  const [loggedin, setLoggedin] = useState(false)
 
   const sliderImages = [
     'img/sliderimages/1.jpg',
@@ -116,13 +117,17 @@ function App() {
     onAuthStateChanged(auth, user => {
       if (user) {
         console.log(user)
+        setLoggedin(true);
         get(ref(db, 'users/' + user.uid)).then((snapshot) => {
           setName(snapshot.val().name)
         }).catch((error) => {
+
           console.error(error);
         });
       } else {
         setName('Sign in')
+        setLoggedin(false);
+
         console.log('You are not Logged in.')
       }
     })
@@ -132,12 +137,14 @@ function App() {
   const logout = async () => {
     await signOut(auth);
   }
+
+  console.log(loggedin)
   return (
     <Router>
 
       <Routes >
         <Route exact path="/" element={<>
-          <Navbar logout={logout} name={name} />
+          <Navbar logout={logout} name={name} loggedin={loggedin}/>
           <ImgSlider images={sliderImages} />
           <div className='body'>
             <div className="row">
@@ -175,7 +182,7 @@ function App() {
           <Login purpose={'Create Account'} account={createAccount} />
         </>} />
         <Route path="/sellsomething" element={<>
-          <SellSomething/>
+          <SellSomething />
         </>} />
       </Routes >
     </Router >

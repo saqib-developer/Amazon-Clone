@@ -22,7 +22,11 @@ export default function Navbar(props) {
             <Link to='/signin'>Hello, {props.name}<br /><b>Account & Lists</b></Link>
             <a href='/'>Returns<br /><b>& Orders</b></a>
             <a onClick={props.logout} href='/'><b>Log out</b></a>
-            <Link  to='/sellsomething'><b>Sell Something</b></Link>
+            {
+                props.loggedin?
+            <Link  to='/sellsomething'><b>Sell Something</b></Link>:
+            <></>
+            }
             <a href='/' className='cart'>
                 <div>
                     <ShoppingCartOutlinedIcon />

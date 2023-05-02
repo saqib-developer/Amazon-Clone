@@ -1,0 +1,94 @@
+.add {
+    width: 80%;
+    border: 0.8px solid grey;
+    border-radius: 8px;
+    padding: 19px 38px;
+    margin-bottom: 37px;
+}
+
+#title {
+    width: 99%;
+    height: 44px;
+    border-radius: 4px;
+    border: 1.5px solid grey;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+    font-family: sans-serif;
+}
+
+#description {
+    font-family: Roboto, Helvetica, sans-serif;
+    padding: 7px;
+    overflow-y: auto;
+    width: 98%;
+    height: 160px;
+    text-overflow: ellipsis;
+    resize: none;
+    border-radius: 4px;
+    border: 1.5px solid grey;
+    font-size: 1.1rem;
+
+}
+
+.input-container {
+    width: 99%;
+    height: 44px;
+    border-radius: 4px;
+    border: 1.5px solid grey;
+
+}
+
+.input-container span {
+    padding: 0 10px;
+}
+
+#price {
+    border: none;
+    height: 87%;
+    width: 95%;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.file {
+    border: 1.5px solid grey;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin: 11px 13px;
+    cursor: pointer;
+    transition: all 0.8s;
+    border-radius: 9px;
+}
+
+.file:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 7px 3px orange;
+}
+
+.file svg {
+    margin: 21%;
+    font-size: 4em;
+    color: #ff9900;
+}
+
+.post {
+    background: orange;
+    color: white;
+    border-radius: 5px;
+    width: 102px;
+    height: 42px;
+    box-shadow: 0px 0px 5px 0px #b2b2b2;
+}
+
+.post:hover {
+    box-shadow: 0px 0px 7px 1px #d18700;
+}
+
+#title:focus,
+#description:focus {
+    border: 1.5px solid orange;
+    outline: none;
+}
