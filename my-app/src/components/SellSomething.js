@@ -1,9 +1,24 @@
-import React from 'react'
+import Reac, { useState } from 'react'
 import './SellSomething.css'
 import { Link } from "react-router-dom";
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
 
 export default function SellSomething() {
+    const [title, setTitle] = useState("")
+    const titleCounter = (event) => {
+        setTitle(event.target.value)
+    }
+
+    const [description, setDescription] = useState("")
+    const descriptionCounter = (event) => {
+        setDescription(event.target.value)
+    }
+
+    const noOfChar = (text) => {
+        let noOfChar = text.length;
+        return noOfChar
+    }
+
     return (
         <form className='sell'>
             <Link className='signin-logo' to={'/'}><img src="img/amazon-logo-black.png" alt="" /></Link>
@@ -11,46 +26,58 @@ export default function SellSomething() {
             <div className="add">
                 <h2>INCLUDE SOME DETAILS</h2>
 
+                <label htmlFor="category">Category of the Item</label>
+                <br />
+                <select name="" id="category">
+                    <option value="electronics">Electronics</option>
+                    <option value="">Sports and outdoor</option>
+                    <option value="">Toys and games</option>
+                    <option value="">Clothing and accessories</option>
+                    <option value="">Home and garden</option>
+                    <option value="">Health and beauty</option>
+                    <option value="">Pet supplies</option>
+                    <option value="">Books and media</option>
+                </select>
+                <br />
+                <br />
+
                 <label htmlFor="name">Ad title</label>
-                <input id="title" name="title" spellCheck="false" maxLength="70" />
+                <input required id="title" name="title" spellCheck="false" minLength={3} maxLength="70" onChange={titleCounter} />
+                <p>{noOfChar(title)}/70</p>
 
                 <label htmlFor="description">Description</label>
-                <textarea id="description" name="description" spellCheck="false" maxLength="4096" autoComplete="nope"></textarea>
+                <textarea onChange={descriptionCounter} required id="description" name="description" spellCheck="false" minLength={50} maxLength="4000" autoComplete="nope"></textarea>
+                <p>{noOfChar(description)}/4000</p>
                 <hr />
 
                 <h2>SET A PRICE</h2>
                 <label htmlFor="price">Price</label>
                 <div className='input-container'>
                     <span>Rs  |</span>
-                    <input id="price" name="price" spellCheck="false" autoComplete="nope" type="number" />
+                    <input required id="price" name="price" spellCheck="false" autoComplete="nope" type="number" />
                 </div>
                 <hr />
 
                 <h2>UPLOAD UPTO 5 PHOTOS</h2>
                 <label htmlFor="file1" className='file'><AddAPhotoOutlinedIcon /></label>
-                <input onChange={() => { console.log('I was changed') }} type="file" accept='image/*' id='file1' />
+                <input required onChange={() => { console.log('I was changed') }} type="file" accept='image/*' id='file1' />
 
                 <label htmlFor="file2" className='file'><AddAPhotoOutlinedIcon /></label>
-                <input type="file" accept='image/*' id='file2' />
+                <input required type="file" accept='image/*' id='file2' />
 
                 <label htmlFor="file3" className='file'><AddAPhotoOutlinedIcon /></label>
-                <input type="file" accept='image/*' id='file3' />
+                <input required type="file" accept='image/*' id='file3' />
 
                 <label htmlFor="file4" className='file'><AddAPhotoOutlinedIcon /></label>
-                <input type="file" accept='image/*' id='file4' />
+                <input required type="file" accept='image/*' id='file4' />
 
                 <label htmlFor="file5" className='file'><AddAPhotoOutlinedIcon /></label>
-                <input type="file" accept='image/*' id='file5' />
+                <input required type="file" accept='image/*' id='file5' />
                 <br />
                 <hr />
                 <br />
-                
-                <button type='submit' className='post'>Post now</button>
-                <br />
-                <br />
 
-                <label htmlFor="category">Category of the Item you are trying to sell: </label>
-                <input type="text" />
+                <button type='submit' className='post'>Post now</button>
             </div>
             <div style={{ background: '#37475a', color: 'white' }} className="footer">
                 This is an amazon Clone made just for Practice and Fun Purposes!

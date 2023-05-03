@@ -6,12 +6,16 @@
     margin-bottom: 37px;
 }
 
+.add p{
+    text-align: right;
+    margin: 3px 0 31px 0;
+}
+
 #title {
     width: 99%;
     height: 44px;
     border-radius: 4px;
     border: 1.5px solid grey;
-    margin-bottom: 30px;
     font-size: 1.2rem;
     font-family: sans-serif;
 }
