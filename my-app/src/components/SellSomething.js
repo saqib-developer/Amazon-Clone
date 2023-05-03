@@ -1,4 +1,4 @@
-import Reac, { useState } from 'react'
+import React, { useState } from 'react'
 import './SellSomething.css'
 import { Link } from "react-router-dom";
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
