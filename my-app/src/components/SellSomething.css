@@ -11,6 +11,18 @@
     margin: 3px 0 31px 0;
 }
 
+#category{
+    width: 99%;
+    height: 44px;
+    border: 1.5px solid grey;
+    border-radius: 4px;
+}
+
+#category:focus{
+    border: 1.5px solid #ff9900;
+    outline: none;
+}
+
 #title {
     width: 99%;
     height: 44px;
@@ -76,6 +88,10 @@ input[type="file"] {
     margin: 21%;
     font-size: 4em;
     color: #ff9900;
+}
+
+.file img {
+    width: 100px;
 }
 
 .post {

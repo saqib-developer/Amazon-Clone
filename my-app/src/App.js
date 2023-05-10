@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import Card1link from './components/Card-1link';
 import Card4link from './components/Card-4link';
+import CardProd from './components/Card-prod';
 import Navbar from './components/Navbar';
 import ImgSlider from './components/ImgSlider';
 import Footer from './components/Footer';
@@ -144,7 +145,7 @@ function App() {
 
       <Routes >
         <Route exact path="/" element={<>
-          <Navbar logout={logout} name={name} loggedin={loggedin}/>
+          <Navbar logout={logout} name={name} loggedin={loggedin} />
           <ImgSlider images={sliderImages} />
           <div className='body'>
             <div className="row">
@@ -153,24 +154,28 @@ function App() {
                 name1={'Headsets'}
                 name2={'Airpods'}
                 name3={'Iphone 14'}
-                name4={'Camera'} />
+                name4={'Camera'}
+                goto={'/'} />
               <Card4link
                 title={'Sports and outdoor'}
                 name1={'Football'}
                 name2={'Watch'}
                 name3={'Drones'}
-                name4={'Binoculars'} />
+                name4={'Binoculars'}
+                goto={'/'} />
               <Card4link
                 title={'Toys and games'}
                 name1={'Chairs'}
                 name2={'CPU'}
                 name3={'Spinner'}
-                name4={'Playstation'} />
-              <Card1link title={'Clothing and accessories'} />
-              <Card1link title={'Home and garden'} />
-              <Card1link title={'Health and beauty'} />
-              <Card1link title={'Pet supplies'} />
-              <Card1link title={'Books and media'} />
+                name4={'Playstation'}
+                goto={'/'} />
+              <Card1link title={'Clothing and accessories'} goto={'/'} />
+              <Card1link title={'Home and garden'} goto={'/'} />
+              <Card1link title={'Health and beauty'} goto={'/'} />
+              <Card1link title={'Pet supplies'} goto={'/'} />
+              <Card1link title={'Books and media'} goto={'/'} />
+              <Card1link title={'Shop all'} goto={'/all'} />
             </div>
           </div>
           <Footer />
@@ -184,6 +189,14 @@ function App() {
         <Route path="/sellsomething" element={<>
           <SellSomething />
         </>} />
+        <Route path="/all" element={
+          <>
+
+            <Navbar logout={logout} name={name} loggedin={loggedin} />
+            
+            <Footer />
+          </>
+        } />
       </Routes >
     </Router >
   );

@@ -18,7 +18,18 @@ export default function SellSomething() {
         let noOfChar = text.length;
         return noOfChar
     }
+    const [src1, setSrc1] = useState()
 
+    const putImage = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = (event) => {
+            setSrc1(event.target.result);
+        };
+
+        reader.readAsDataURL(file);
+    }
     return (
         <form className='sell'>
             <Link className='signin-logo' to={'/'}><img src="img/amazon-logo-black.png" alt="" /></Link>
@@ -26,6 +37,17 @@ export default function SellSomething() {
             <div className="add">
                 <h2>INCLUDE SOME DETAILS</h2>
 
+
+                <label htmlFor="name">Ad title</label>
+                <input required id="title" name="title" spellCheck="false" minLength={3} maxLength="70" onChange={titleCounter} />
+                <p>{noOfChar(title)}/70</p>
+
+                <label htmlFor="description">Description</label>
+                <textarea onChange={descriptionCounter} required id="description" name="description" spellCheck="false" minLength={50} maxLength="4000" autoComplete="nope"></textarea>
+                <p>{noOfChar(description)}/4000</p>
+                <hr />
+
+                <h2>Category</h2>
                 <label htmlFor="category">Category of the Item</label>
                 <br />
                 <select name="" id="category">
@@ -40,16 +62,8 @@ export default function SellSomething() {
                 </select>
                 <br />
                 <br />
-
-                <label htmlFor="name">Ad title</label>
-                <input required id="title" name="title" spellCheck="false" minLength={3} maxLength="70" onChange={titleCounter} />
-                <p>{noOfChar(title)}/70</p>
-
-                <label htmlFor="description">Description</label>
-                <textarea onChange={descriptionCounter} required id="description" name="description" spellCheck="false" minLength={50} maxLength="4000" autoComplete="nope"></textarea>
-                <p>{noOfChar(description)}/4000</p>
                 <hr />
-
+                <br />
                 <h2>SET A PRICE</h2>
                 <label htmlFor="price">Price</label>
                 <div className='input-container'>
@@ -59,8 +73,10 @@ export default function SellSomething() {
                 <hr />
 
                 <h2>UPLOAD UPTO 5 PHOTOS</h2>
-                <label htmlFor="file1" className='file'><AddAPhotoOutlinedIcon /></label>
-                <input required onChange={() => { console.log('I was changed') }} type="file" accept='image/*' id='file1' />
+                <label htmlFor="file1" className='file'>
+                    {src1 ? <img src={src1} alt="" /> : <AddAPhotoOutlinedIcon />}
+                </label>
+                <input required onChange={putImage} type="file" accept='image/*' id='file1' />
 
                 <label htmlFor="file2" className='file'><AddAPhotoOutlinedIcon /></label>
                 <input required type="file" accept='image/*' id='file2' />
