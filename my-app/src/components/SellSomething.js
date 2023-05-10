@@ -3,7 +3,7 @@ import './SellSomething.css'
 import { Link } from "react-router-dom";
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
 
-export default function SellSomething() {
+export default function SellSomething(props) {
     const [title, setTitle] = useState("")
     const titleCounter = (event) => {
         setTitle(event.target.value)
@@ -31,7 +31,7 @@ export default function SellSomething() {
         reader.readAsDataURL(file);
     }
     return (
-        <form className='sell'>
+        <form className='sell' onSubmit={props.postAdd}>
             <Link className='signin-logo' to={'/'}><img src="img/amazon-logo-black.png" alt="" /></Link>
             <h1>Post Your Add</h1>
             <div className="add">

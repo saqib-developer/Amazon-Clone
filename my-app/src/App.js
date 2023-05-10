@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   BrowserRouter as Router,
   Routes,
@@ -28,7 +28,11 @@ import {
   get,
   set
 } from 'firebase/database';
+import { getStorage } from "firebase/storage";
+
 import SellSomething from './components/SellSomething';
+import { v4 as uuidv4 } from 'uuid';
+
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -51,8 +55,11 @@ function App() {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app)
   const db = getDatabase(app);
+  const storage = getStorage(app);
+  // const storageRef = ref(storage);
   const [loggedin, setLoggedin] = useState(false)
 
+  console.log(uuidv4())
   const sliderImages = [
     'img/sliderimages/1.jpg',
     'img/sliderimages/2.jpg',
@@ -139,7 +146,26 @@ function App() {
     await signOut(auth);
   }
 
-  console.log(loggedin)
+  const [products, setProducts] = useState()
+
+  useEffect(() => {
+    get(ref(db, 'Products')).then((snapshot) => {
+      console.log(snapshot.val())
+      let updateProducts = [];
+      for (const index in snapshot.val()) {
+        updateProducts.push(snapshot.val()[index]);
+      }
+      setProducts(updateProducts);
+    }).catch((error) => {
+      console.error(error);
+    });
+  }, [db]);
+
+  const postAdd = (event) =>{
+    event.preventDefault();
+
+  }
+
   return (
     <Router>
 
@@ -187,13 +213,17 @@ function App() {
           <Login purpose={'Create Account'} account={createAccount} />
         </>} />
         <Route path="/sellsomething" element={<>
-          <SellSomething />
+          <SellSomething postAdd={postAdd} />
         </>} />
         <Route path="/all" element={
           <>
 
             <Navbar logout={logout} name={name} loggedin={loggedin} />
-            
+            {products && products.map((data, index) => (
+              <React.Fragment key={index}>
+                <CardProd name={data.name} desc={data.desc} />
+              </React.Fragment>
+            ))}
             <Footer />
           </>
         } />
