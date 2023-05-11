@@ -64,3 +64,14 @@ header a:hover{
     display: flex;
     flex-direction: column;
 }
+
+.menu{
+    position: absolute;
+    background: #1d2734;
+    box-shadow: 0 0 5px 0px #ff9900;
+    border-radius: 5px;
+    padding: 8px;
+    display: none;
+    flex-direction: column;
+    z-index: 1;
+}
