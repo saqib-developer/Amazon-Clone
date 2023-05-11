@@ -24,11 +24,14 @@ import {
 } from 'firebase/auth';
 import {
   getDatabase,
-  ref,
+  ref as databaseRef,
   get,
   set
 } from 'firebase/database';
-import { getStorage } from "firebase/storage";
+import {
+  getStorage,
+  ref as storageRef
+} from "firebase/storage";
 
 import SellSomething from './components/SellSomething';
 import { v4 as uuidv4 } from 'uuid';
@@ -56,10 +59,11 @@ function App() {
   const auth = getAuth(app)
   const db = getDatabase(app);
   const storage = getStorage(app);
-  // const storageRef = ref(storage);
+  const storagRef = storageRef(storage);
+
   const [loggedin, setLoggedin] = useState(false)
 
-  console.log(uuidv4())
+  // console.log(uuidv4())
   const sliderImages = [
     'img/sliderimages/1.jpg',
     'img/sliderimages/2.jpg',
@@ -103,7 +107,7 @@ function App() {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, signinEmail, signinPassword)
 
-      set(ref(db, 'users/' + userCredential.user.uid), {
+      set(databaseRef(db, 'users/' + userCredential.user.uid), {
         name: signinName,
         email: signinEmail
       })
@@ -126,7 +130,7 @@ function App() {
       if (user) {
         console.log(user)
         setLoggedin(true);
-        get(ref(db, 'users/' + user.uid)).then((snapshot) => {
+        get(databaseRef(db, 'users/' + user.uid)).then((snapshot) => {
           setName(snapshot.val().name)
         }).catch((error) => {
 
@@ -149,7 +153,7 @@ function App() {
   const [products, setProducts] = useState()
 
   useEffect(() => {
-    get(ref(db, 'Products')).then((snapshot) => {
+    get(databaseRef(db, 'Products')).then((snapshot) => {
       console.log(snapshot.val())
       let updateProducts = [];
       for (const index in snapshot.val()) {
@@ -161,9 +165,8 @@ function App() {
     });
   }, [db]);
 
-  const postAdd = (event) =>{
-    event.preventDefault();
-
+  const postAdd = (event) => {
+    // event.preventDefault();
   }
 
   return (

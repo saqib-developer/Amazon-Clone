@@ -26,6 +26,7 @@ export default function SellSomething(props) {
 
         reader.onload = (event) => {
             setSrc1(event.target.result);
+            // props.postAdd();
         };
 
         reader.readAsDataURL(file);
