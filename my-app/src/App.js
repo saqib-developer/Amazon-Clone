@@ -31,6 +31,7 @@ import {
 import {
   getStorage,
   ref as storageRef,
+  getDownloadURL,
   uploadBytesResumable
 } from "firebase/storage";
 
@@ -167,97 +168,88 @@ function App() {
     });
   }, [db]);
 
-  const postAdd = (event) => {
+  const postAdd = async (event) => {
     event.preventDefault();
 
     const productId = uuidv4();
-    const name = document.getElementById('title').value
-    const desc = document.getElementById('description').value
-    const category = document.getElementById('category').value
-    const price = document.getElementById('price').value
+    const name = document.getElementById('title').value;
+    const desc = document.getElementById('description').value;
+    const category = document.getElementById('category').value;
+    const price = document.getElementById('price').value;
     const file1 = document.getElementById('file1').files[0];
     const file2 = document.getElementById('file2').files[0];
     const file3 = document.getElementById('file3').files[0];
     const file4 = document.getElementById('file4').files[0];
     const file5 = document.getElementById('file5').files[0];
 
-    console.log(`Name: ${name}, Description: ${desc}, Category: ${category}, Price: ${price}, File1: ${file1}, File2: ${file2}, File3: ${file3}, File4: ${file4}, File5: ${file5}, `)
-    //Upoading Data
+    console.log(`Name: ${name}, Description: ${desc}, Category: ${category}, Price: ${price}, File1: ${file1}, File2: ${file2}, File3: ${file3}, File4: ${file4}, File5: ${file5}`);
 
-    set(databaseRef(db, 'products/' + productId), {
-      name: name,
-      desc: desc,
-      category: category,
-      price: price,
-      id:productId,
-      owner: userUid
-    })
-      .then(() => {
-        console.log('Product successfully saved')
-      })
-      .catch((error) => {
-        console.log('error: ' + error)
+    try {
+      // Uploading Images
+      const metadata = {
+        contentType: file1.type,
+      };
+
+      const storageRef1 = storageRef(storage, `Product Images/${productId}/${file1.name}`);
+      const uploadTask1 = uploadBytesResumable(storageRef1, file1, metadata);
+
+      const storageRef2 = storageRef(storage, `Product Images/${productId}/${file2.name}`);
+      const uploadTask2 = uploadBytesResumable(storageRef2, file2, metadata);
+
+      const storageRef3 = storageRef(storage, `Product Images/${productId}/${file3.name}`);
+      const uploadTask3 = uploadBytesResumable(storageRef3, file3, metadata);
+
+      const storageRef4 = storageRef(storage, `Product Images/${productId}/${file4.name}`);
+      const uploadTask4 = uploadBytesResumable(storageRef4, file4, metadata);
+
+      const storageRef5 = storageRef(storage, `Product Images/${productId}/${file5.name}`);
+      const uploadTask5 = uploadBytesResumable(storageRef5, file5, metadata);
+
+      // Wait for all image upload tasks to complete
+      const uploadPromises = [
+        uploadTask1,
+        uploadTask2,
+        uploadTask3,
+        uploadTask4,
+        uploadTask5,
+      ];
+      await Promise.all(uploadPromises);
+
+      // Fetch the download URLs of the uploaded images
+      const downloadURLs = await Promise.all([
+        getDownloadURL(storageRef1),
+        getDownloadURL(storageRef2),
+        getDownloadURL(storageRef3),
+        getDownloadURL(storageRef4),
+        getDownloadURL(storageRef5),
+      ]);
+
+      // Create an object with the image filenames (without extensions) as keys and their download URLs as values
+      const imagesData = [
+        downloadURLs[0],
+        downloadURLs[1],
+        downloadURLs[2],
+        downloadURLs[3],
+        downloadURLs[4],
+      ];
+
+      // Save the data, including the download links, to the Realtime Database
+      await set(databaseRef(db, 'products/' + productId), {
+        name: name,
+        desc: desc,
+        category: category,
+        price: price,
+        id: productId,
+        owner: userUid,
+        images: imagesData,
       });
 
-    //Uploading Images
-    const metadata = {
-      contentType: file1.type,
-    };
-    const storageRef1 = storageRef(storage, `Product Images/${productId}/${file1.name}`);
-    const uploadTask1 = uploadBytesResumable(storageRef1, file1, metadata);
-
-    const storageRef2 = storageRef(storage, `Product Images/${productId}/${file2.name}`);
-    const uploadTask2 = uploadBytesResumable(storageRef2, file2, metadata);
-
-    const storageRef3 = storageRef(storage, `Product Images/${productId}/${file3.name}`);
-    const uploadTask3 = uploadBytesResumable(storageRef3, file3, metadata);
-
-    const storageRef4 = storageRef(storage, `Product Images/${productId}/${file4.name}`);
-    const uploadTask4 = uploadBytesResumable(storageRef4, file4, metadata);
-
-    const storageRef5 = storageRef(storage, `Product Images/${productId}/${file5.name}`);
-    const uploadTask5 = uploadBytesResumable(storageRef5, file5, metadata);
-
-    // uploadTask.on(
-    //   'state_changed',
-    //   (snapshot) => {
-    //     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-    //     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-    //     console.log('Upload is ' + progress + '% done');
-    //     switch (snapshot.state) {
-    //       case 'paused':
-    //         console.log('Upload is paused');
-    //         break;
-    //       case 'running':
-    //         console.log('Upload is running');
-    //         break;
-    //       default:
-    //         break;
-    //     }
-    //   },
-    //   (error) => {
-    //     // A full list of error codes is available at
-    //     // https://firebase.google.com/docs/storage/web/handle-errors
-    //     switch (error.code) {
-    //       case 'storage/unauthorized':
-    //         // User doesn't have permission to access the object
-    //         break;
-    //       case 'storage/canceled':
-    //         // User canceled the upload
-    //         break;
-
-    //       // ...
-
-    //       case 'storage/unknown':
-    //         // Unknown error occurred, inspect error.serverResponse
-    //         break;
-    //       default:
-    //         break;
-    //     }
-    //   });
-
-    // window.location.href = '/';
+      console.log('Product successfully saved');
+    } catch (error) {
+      console.error('Error uploading images:', error);
+    }
   }
+
 
   return (
     <Router>
@@ -314,7 +306,7 @@ function App() {
             <Navbar logout={logout} name={name} loggedin={loggedin} />
             {products && products.map((data, index) => (
               <React.Fragment key={index}>
-                <CardProd name={data.name} desc={data.desc} />
+                <CardProd name={data.name} desc={data.desc} src={data.images[0]} />
               </React.Fragment>
             ))}
             <Footer />
