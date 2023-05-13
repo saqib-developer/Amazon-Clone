@@ -12,3 +12,20 @@
     width: 95%;
     margin: 0 auto;
 }
+
+.container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.addtocart{
+    background-color: white;
+    width: 33px;
+    box-shadow: 0 0 6px 0px #ff9900;
+    border-radius: 4px;
+    transition: all 0.8s;
+}
+
+.addtocart:hover{
+    box-shadow: 0 0 10px 2px #ff9900;
+}

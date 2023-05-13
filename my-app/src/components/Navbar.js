@@ -36,6 +36,7 @@ export default function Navbar(props) {
                     props.loggedin ?
                         <>
                             <Link to='/sellsomething'><b>Sell Something</b></Link>
+                            <Link to='/useradds'><b>Your Adds</b></Link>
                             <a onClick={props.logout} href='/' ><b>Log out</b></a>
                         </>
                         :
@@ -46,12 +47,12 @@ export default function Navbar(props) {
             </div>
             </Link>
             <a href='/'>Returns<br /><b>& Orders</b></a>
-            <a href='/' className='cart'>
+            <Link to='/cart' className='cart'>
                 <div>
                     <ShoppingCartOutlinedIcon />
                 </div>
                 <span><b>Cart</b></span>
-            </a>
+            </Link>
         </header>
     )
 }

@@ -243,11 +243,108 @@ function App() {
         owner: userUid,
         images: imagesData,
       });
+      // Fetch existing data
+      const snapshot = await get(databaseRef(db, `users/${userUid}/youradds`));
+
+      // Get the current data value or initialize an empty array if it doesn't exist
+      const currentData = snapshot.exists() ? snapshot.val() : [];
+
+      // Update data with new value
+      const newData = [...currentData, productId];
+
+      // Save the updated data to the database
+      await set(databaseRef(db, `users/${userUid}/youradds`), newData);
 
       console.log('Product successfully saved');
+      window.location.href = '/';
+
     } catch (error) {
       console.error('Error uploading images:', error);
     }
+  }
+
+  let [userProducts, setUserProducts] = useState();
+
+  const getItem = (productId) => {
+    return get(databaseRef(db, `products/${productId}`))
+      .then((snapshot) => {
+        return snapshot.val();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  if (userUid !== null) {
+    let temp = [];
+    get(databaseRef(db, `users/${userUid}/youradds`))
+      .then((snapshot) => {
+        const promises = snapshot.val().map((element) => {
+          return getItem(element)
+            .then((value) => {
+              temp.push(value);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+
+        Promise.all(promises)
+          .then(() => {
+            setUserProducts(temp);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  let [userCart, setUserCart] = useState();
+
+  if (userUid !== null) {
+    let temp = [];
+    get(databaseRef(db, `users/${userUid}/cart`))
+      .then((snapshot) => {
+        const promises = snapshot.val().map((element) => {
+          return getItem(element)
+            .then((value) => {
+              temp.push(value);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        });
+
+        Promise.all(promises)
+          .then(() => {
+            setUserCart(temp);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  const addToCart = async (productId) => {
+    // Fetch existing data
+    const snapshot = await get(databaseRef(db, `users/${userUid}/cart`));
+
+    // Get the current data value or initialize an empty array if it doesn't exist
+    const currentData = snapshot.exists() ? snapshot.val() : [];
+
+    // Update data with new value
+    const newData = [...currentData, productId];
+
+    // Save the updated data to the database
+    await set(databaseRef(db, `users/${userUid}/cart`), newData);
+
+    console.log('Product successfully saved');
   }
 
 
@@ -306,7 +403,30 @@ function App() {
             <Navbar logout={logout} name={name} loggedin={loggedin} />
             {products && products.map((data, index) => (
               <React.Fragment key={index}>
-                <CardProd name={data.name} desc={data.desc} src={data.images[0]} />
+                <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
+              </React.Fragment>
+            ))}
+            <Footer />
+          </>
+        } />
+        <Route path="/useradds" element={
+          <>
+            <Navbar logout={logout} name={name} loggedin={loggedin} />
+            {userProducts && userProducts.map((data, index) => (
+              <React.Fragment key={index}>
+                <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
+              </React.Fragment>
+            ))}
+            <Footer />
+          </>
+        } />
+
+        <Route path="/cart" element={
+          <>
+            <Navbar logout={logout} name={name} loggedin={loggedin} />
+            {userCart && userCart.map((data, index) => (
+              <React.Fragment key={index}>
+                <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
               </React.Fragment>
             ))}
             <Footer />
