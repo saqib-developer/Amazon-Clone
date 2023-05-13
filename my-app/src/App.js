@@ -401,22 +401,28 @@ function App() {
           <>
 
             <Navbar logout={logout} name={name} loggedin={loggedin} />
-            {products && products.map((data, index) => (
-              <React.Fragment key={index}>
-                <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
-              </React.Fragment>
-            ))}
+            <div className="row">
+
+              {products && products.map((data, index) => (
+                <React.Fragment key={index}>
+                  <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
+                </React.Fragment>
+              ))}
+            </div>
             <Footer />
           </>
         } />
         <Route path="/useradds" element={
           <>
             <Navbar logout={logout} name={name} loggedin={loggedin} />
-            {userProducts && userProducts.map((data, index) => (
-              <React.Fragment key={index}>
-                <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
-              </React.Fragment>
-            ))}
+            <div className="row">
+
+              {userProducts && userProducts.map((data, index) => (
+                <React.Fragment key={index}>
+                  <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
+                </React.Fragment>
+              ))}
+            </div>
             <Footer />
           </>
         } />
@@ -424,11 +430,14 @@ function App() {
         <Route path="/cart" element={
           <>
             <Navbar logout={logout} name={name} loggedin={loggedin} />
-            {userCart && userCart.map((data, index) => (
-              <React.Fragment key={index}>
-                <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
-              </React.Fragment>
-            ))}
+            <div className="row">
+
+              {userCart && userCart.map((data, index) => (
+                <React.Fragment key={index}>
+                  <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
+                </React.Fragment>
+              ))}
+            </div>
             <Footer />
           </>
         } />
