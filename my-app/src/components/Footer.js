@@ -10,7 +10,7 @@ export default function Footer() {
             <button onClick={toTop}>Back to top</button>
             <div className='sec1'>
                 <div className="row" style={{ margin: 0 }}>
-                    <div className="column">
+                    <div>
                         <b>Get to Know Us</b>
                         <br />
                         Lorem<br />
@@ -23,7 +23,7 @@ export default function Footer() {
                         elit<br />
                         corrupti
                     </div>
-                    <div className="column">
+                    <div>
                         <b>Make Money with Us</b><br />
                         Lorem, ipsum dolor.<br />
                         Lorem, ipsum.<br />
@@ -36,7 +36,7 @@ export default function Footer() {
                         Lorem ipsum dolor amet consectetur. <br />
                         Lorem ipsum dolor sit <br />
                     </div>
-                    <div className="column">
+                    <div>
                         <b>Amazon Payment Products</b><br />
                         Lorem, ipsum dolor.<br />
                         Lorem, ipsum.<br />
@@ -44,7 +44,7 @@ export default function Footer() {
                         Lorem, ipsum dolor.<br />
                         Lorem ipsum dolor amet consectetur. <br />
                     </div>
-                    <div className="column">
+                    <div>
                         <b>Let Us Help You</b><br />
                         Lorem, ipsum dolor.<br />
                         Lorem ipsum dolor sit amet.<br />

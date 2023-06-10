@@ -1,21 +1,29 @@
+
+@media screen and (max-width:630px) {
+    .input-field input {
+        width: 260px !important;
+    }
+}
+
 header {
     background-color: #131921;
     color: white;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
     padding: 2px;
 }
 
-header a{
+header a {
     color: white;
     border: 1px solid transparent;
     border-radius: 3px;
     padding: 5px;
 }
 
-header a:hover{
+header a:hover {
     color: white;
     text-decoration: none;
     border: 1px solid white;
@@ -23,6 +31,7 @@ header a:hover{
 
 .top-logo img {
     width: 7.5vw;
+    min-width: 65px;
 }
 
 .input-field {
@@ -54,18 +63,27 @@ header a:hover{
     background-color: #f0a543;
 }
 
-.cart{
+.cart {
     display: flex;
+    flex-direction: column;
     align-items: center;
     color: white;
 }
 
-.cart div{
-    display: flex;
-    flex-direction: column;
+.cart p{
+    
+    margin: 0;
+    color: orange;
+    font-size: large;
+    font-family: cursive;
+    margin-right: 21px;
 }
 
-.menu{
+.cart-img{
+    display: flex;
+}
+
+.menu {
     position: absolute;
     background: #1d2734;
     box-shadow: 0 0 5px 0px #ff9900;

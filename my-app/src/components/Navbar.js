@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from "react-router-dom";
 import './Navbar.css'
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
@@ -31,27 +31,30 @@ export default function Navbar(props) {
             </div>
             <Link onMouseEnter={handleHover} onMouseLeave={handleHoverEnd} to='/signin'>
                 Hello, {props.name}<br /><b>Account & Lists</b>
-            <div className="menu" id='menu'>
-                {
-                    props.loggedin ?
-                        <>
-                            <Link to='/sellsomething'><b>Sell Something</b></Link>
-                            <Link to='/useradds'><b>Your Adds</b></Link>
-                            <a onClick={props.logout} href='/' ><b>Log out</b></a>
-                        </>
-                        :
-                        <>
-                            <Link to='/signin'>Log In</Link>
-                        </>
-                }
-            </div>
+                <div className="menu" id='menu'>
+                    {
+                        props.loggedin ?
+                            <>
+                                <Link to='/sellsomething'><b>Sell Something</b></Link>
+                                <Link to='/useradds'><b>Your Adds</b></Link>
+                                <a onClick={props.logout} href='/' ><b>Log out</b></a>
+                            </>
+                            :
+                            <>
+                                <Link to='/signin'>Log In</Link>
+                            </>
+                    }
+                </div>
             </Link>
             <a href='/'>Returns<br /><b>& Orders</b></a>
             <Link to='/cart' className='cart'>
-                <div>
-                    <ShoppingCartOutlinedIcon />
+                <p>{props.cartLength}</p>
+                <div className='cart-img'>
+                    <div>
+                        <ShoppingCartOutlinedIcon />
+                    </div>
+                    <span><b>Cart</b></span>
                 </div>
-                <span><b>Cart</b></span>
             </Link>
         </header>
     )

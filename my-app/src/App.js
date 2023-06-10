@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react'
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
+  Link
 } from 'react-router-dom';
 import Card1link from './components/Card-1link';
 import Card4link from './components/Card-4link';
@@ -37,6 +38,7 @@ import {
 
 import SellSomething from './components/SellSomething';
 import { v4 as uuidv4 } from 'uuid';
+import ProductDetail from './components/ProductDetail';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -302,7 +304,7 @@ function App() {
       });
   }
 
-  let [userCart, setUserCart] = useState();
+  let [userCart, setUserCart] = useState([]);
 
   if (userUid !== null) {
     let temp = [];
@@ -353,7 +355,7 @@ function App() {
 
       <Routes >
         <Route exact path="/" element={<>
-          <Navbar logout={logout} name={name} loggedin={loggedin} />
+          <Navbar cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
           <ImgSlider images={sliderImages} />
           <div className='body'>
             <div className="row">
@@ -399,13 +401,15 @@ function App() {
         </>} />
         <Route path="/all" element={
           <>
-
-            <Navbar logout={logout} name={name} loggedin={loggedin} />
+            <Navbar cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
             <div className="row">
 
               {products && products.map((data, index) => (
                 <React.Fragment key={index}>
-                  <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
+                  <Link to={`/${data.id}`}>
+
+                    <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
+                  </Link>
                 </React.Fragment>
               ))}
             </div>
@@ -414,7 +418,7 @@ function App() {
         } />
         <Route path="/useradds" element={
           <>
-            <Navbar logout={logout} name={name} loggedin={loggedin} />
+            <Navbar cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
             <div className="row">
 
               {userProducts && userProducts.map((data, index) => (
@@ -429,7 +433,7 @@ function App() {
 
         <Route path="/cart" element={
           <>
-            <Navbar logout={logout} name={name} loggedin={loggedin} />
+            <Navbar cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
             <div className="row">
 
               {userCart && userCart.map((data, index) => (
@@ -441,6 +445,17 @@ function App() {
             <Footer />
           </>
         } />
+
+        {products && products.map((product, index) => (
+          <React.Fragment key={index}>
+            <Route path={`/${product.id}`} element={
+              <>
+                <Navbar cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
+                <ProductDetail images={product.images} name={product.name} desc={product.desc} />
+                <Footer />
+              </>} />
+          </React.Fragment>
+        ))}
       </Routes >
     </Router >
   );
