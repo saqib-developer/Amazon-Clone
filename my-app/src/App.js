@@ -435,12 +435,39 @@ function App() {
           <>
             <Navbar cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
             <div className="row">
+              {
+                loggedin ?
+                  <>
+                    {
+                      userCart.length !== 0 ?
+                        <>
+                          {userCart && userCart.map((data, index) => (
+                            <React.Fragment key={index}>
+                              <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
+                            </React.Fragment>
+                          ))}
+                        </>
+                        :
+                        <>
+                          <div className="box">
+                            <p>There is no item in your Cart to Show</p>
+                            <Link to="/all">Shop Now</Link>
+                          </div>
+                        </>
+                    }
+                  </>
+                  :
+                  <>
+                          <div className="box">
+                            <p>You are not logged in please log in to view your Cart Items</p>
+                            <div className='column'>
+                            <Link to="/signin">Sign in</Link>
+                            <Link to="/signup">Sign up</Link>
+                            </div>
+                          </div>
+                  </>
+              }
 
-              {userCart && userCart.map((data, index) => (
-                <React.Fragment key={index}>
-                  <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
-                </React.Fragment>
-              ))}
             </div>
             <Footer />
           </>

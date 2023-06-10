@@ -1,3 +1,9 @@
+@media screen and (max-width:500px) {
+    .Card1link {
+        width: 200px !important;
+    }
+}
+
 .Card1link {
     background-color: white;
     padding: 10px;

@@ -9,3 +9,25 @@
   margin: 20px 0;
   flex-wrap: wrap;
 }
+
+.box {
+  background: #ffb74c;
+  padding: 16px 85px;
+  border-radius: 6px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.2em;
+}
+
+.box a {
+  background: #62bdff;
+  padding: 6px 15px;
+  border-radius: 5px;
+  margin: 0 20px;
+}
+
+.box a:hover {
+  box-shadow: 0 0 7px 0px #0072ff;
+}
