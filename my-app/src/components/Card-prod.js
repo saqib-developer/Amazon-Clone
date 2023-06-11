@@ -1,5 +1,6 @@
 import React from 'react'
 import './Card-prod.css'
+import {Link} from 'react-router-dom'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 export default function Card(props) {
@@ -9,7 +10,8 @@ export default function Card(props) {
             <h3>{props.name}</h3>
             <p>{props.desc}</p>
             <div className='container'>
-                <span>stars</span>
+            <Link to={`/${props.id}`}>Learn more</Link>
+
                 <button onClick={() => props.addToCart(props.id)} className="addtocart">
                 <ShoppingCartOutlinedIcon />
             </button>

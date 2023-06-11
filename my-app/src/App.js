@@ -172,6 +172,7 @@ function App() {
 
   const postAdd = async (event) => {
     event.preventDefault();
+    document.getElementById('submit-button').disabled = true;
 
     const productId = uuidv4();
     const name = document.getElementById('title').value;
@@ -349,7 +350,6 @@ function App() {
     console.log('Product successfully saved');
   }
 
-
   return (
     <Router>
 
@@ -403,10 +403,7 @@ function App() {
 
               {products && products.map((data, index) => (
                 <React.Fragment key={index}>
-                  <Link to={`/${data.id}`}>
-
                     <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
-                  </Link>
                 </React.Fragment>
               ))}
             </div>

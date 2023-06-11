@@ -8,12 +8,10 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 export default function Navbar(props) {
 
     const handleHover = () => {
-        console.log('Button is hovered!');
         document.getElementById('menu').style.display = 'flex'
     };
 
     const handleHoverEnd = () => {
-        console.log('Hover ended!');
         document.getElementById('menu').style.display = 'none'
     };
 
@@ -42,30 +40,12 @@ export default function Navbar(props) {
         window.location.href = `/${id}`;
     }
 
-    //the country of the user
-    const [country, setCountry] = useState('Earth');
-
-useEffect(() => {
-  fetch('http://ip-api.com/json')
-    .then((response) => response.json())
-    .then((data) => {
-      setCountry(data.country);
-      console.log('Country:', data.country);
-      // Perform further actions with the country
-    })
-    .catch((error) => {
-      console.error('Error getting country:', error);
-    });
-}, []);
-
-// Rest of your component code
-
     return (
         <header>
             <a className='top-logo' href="/"><img src="img/amazon-logo-wob.png" alt="amazon logo" /></a>
             <span href='/' style={{ display: 'flex', alignItems: 'center' }}>
                 <LocationOnOutlinedIcon />
-                <div>Deliver to<br /><b>{country}</b></div>
+                <div>Deliver to<br /><b>Pakistan</b></div>
             </span>
             <div className="searchbar">
                 <div className="input-field">
@@ -80,7 +60,7 @@ useEffect(() => {
                     ))}
                 </ul>
             </div>
-            <Link onMouseEnter={handleHover} onMouseLeave={handleHoverEnd} to='/signin'>
+            <span onMouseEnter={handleHover} onMouseLeave={handleHoverEnd} to='/signin'>
                 Hello, {props.name}<br /><b>Account & Lists</b>
                 <div className="menu" id='menu'>
                     {
@@ -96,7 +76,7 @@ useEffect(() => {
                             </>
                     }
                 </div>
-            </Link>
+            </span>
             <a href='/'>Returns<br /><b>& Orders</b></a>
             <Link to='/cart' className='cart'>
                 <p>{props.cartLength}</p>

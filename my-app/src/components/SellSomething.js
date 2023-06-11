@@ -106,14 +106,14 @@ export default function SellSomething(props) {
                         <label htmlFor="category">Category of the Item</label>
                         <br />
                         <select name="" id="category">
-                            <option value="electronics">Electronics</option>
-                            <option value="">Sports and outdoor</option>
-                            <option value="">Toys and games</option>
-                            <option value="">Clothing and accessories</option>
-                            <option value="">Home and garden</option>
-                            <option value="">Health and beauty</option>
-                            <option value="">Pet supplies</option>
-                            <option value="">Books and media</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Sports and outdoor">Sports and outdoor</option>
+                            <option value="Toys and games">Toys and games</option>
+                            <option value="Clothing and accessories">Clothing and accessories</option>
+                            <option value="Home and garden">Home and garden</option>
+                            <option value="Health and beauty">Health and beauty</option>
+                            <option value="Pet supplies">Pet supplies</option>
+                            <option value="Books and media">Books and media</option>
                         </select>
                         <br />
                         <br />
@@ -157,7 +157,7 @@ export default function SellSomething(props) {
                         <hr />
                         <br />
 
-                        <button type='submit' className='post'>Post now</button>
+                        <button type='submit' id='submit-button' className='post'>Post now</button>
                     </div>
                     <div style={{ background: '#37475a', color: 'white' }} className="footer">
                         This is an amazon Clone made just for Practice and Fun Purposes!
