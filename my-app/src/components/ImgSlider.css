@@ -1,25 +1,20 @@
 .image-slider {
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: visible;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .image-slider img {
-    width: 116%;
-    object-fit: cover;
+    width: 100%;
+    position: absolute;
 }
 
 .prv-nxt-btn {
-    position: absolute;
     display: flex;
     flex-direction: row;
     align-items: stretch;
     justify-content: space-between;
     width: 100%;
-    margin-top: -345px;
 }
 
 .prev,
@@ -30,6 +25,7 @@
     width: 6%;
     min-width: 74px;
     border-radius: 6px;
+    margin: 8px;
 }
 
 .prev:focus,

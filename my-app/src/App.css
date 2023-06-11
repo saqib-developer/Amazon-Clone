@@ -1,12 +1,12 @@
 .body {
-  margin-top: -105vh;
+  position: relative;
+  z-index: 1;
 }
 
 .row {
   display: flex;
   align-items: stretch;
   justify-content: space-evenly;
-  margin: 20px 0;
   flex-wrap: wrap;
 }
 

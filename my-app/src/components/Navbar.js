@@ -63,10 +63,10 @@ useEffect(() => {
     return (
         <header>
             <a className='top-logo' href="/"><img src="img/amazon-logo-wob.png" alt="amazon logo" /></a>
-            <a href='/' style={{ display: 'flex', alignItems: 'center' }}>
+            <span href='/' style={{ display: 'flex', alignItems: 'center' }}>
                 <LocationOnOutlinedIcon />
                 <div>Deliver to<br /><b>{country}</b></div>
-            </a>
+            </span>
             <div className="searchbar">
                 <div className="input-field">
                     <input placeholder={'Search Amazon'} type="search" value={searchInput} onChange={handleInputChange} />
