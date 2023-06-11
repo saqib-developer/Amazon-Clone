@@ -26,7 +26,7 @@ export default function Card4link(props) {
                     <span>{props.name4}</span>
                 </div>
             </div>
-            <Link to={props.goto}>See More</Link>
+            <Link to={'/all'}>See More</Link>
         </div>
     )
 }

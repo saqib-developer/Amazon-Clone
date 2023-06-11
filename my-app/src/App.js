@@ -355,7 +355,7 @@ function App() {
 
       <Routes >
         <Route exact path="/" element={<>
-          <Navbar cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
+          <Navbar products={products} cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
           <ImgSlider images={sliderImages} />
           <div className='body'>
             <div className="row">
@@ -364,28 +364,25 @@ function App() {
                 name1={'Headsets'}
                 name2={'Airpods'}
                 name3={'Iphone 14'}
-                name4={'Camera'}
-                goto={'/'} />
+                name4={'Camera'} />
               <Card4link
                 title={'Sports and outdoor'}
                 name1={'Football'}
                 name2={'Watch'}
                 name3={'Drones'}
-                name4={'Binoculars'}
-                goto={'/'} />
+                name4={'Binoculars'} />
               <Card4link
                 title={'Toys and games'}
                 name1={'Chairs'}
                 name2={'CPU'}
                 name3={'Spinner'}
-                name4={'Playstation'}
-                goto={'/'} />
-              <Card1link title={'Clothing and accessories'} goto={'/'} />
-              <Card1link title={'Home and garden'} goto={'/'} />
-              <Card1link title={'Health and beauty'} goto={'/'} />
-              <Card1link title={'Pet supplies'} goto={'/'} />
-              <Card1link title={'Books and media'} goto={'/'} />
-              <Card1link title={'Shop all'} goto={'/all'} />
+                name4={'Playstation'} />
+              <Card1link title={'Clothing and accessories'} />
+              <Card1link title={'Home and garden'} />
+              <Card1link title={'Health and beauty'} />
+              <Card1link title={'Pet supplies'} />
+              <Card1link title={'Books and media'} />
+              <Card1link title={'Shop all'} />
             </div>
           </div>
           <Footer />
@@ -401,7 +398,7 @@ function App() {
         </>} />
         <Route path="/all" element={
           <>
-            <Navbar cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
+            <Navbar products={products} cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
             <div className="row">
 
               {products && products.map((data, index) => (
@@ -418,7 +415,7 @@ function App() {
         } />
         <Route path="/useradds" element={
           <>
-            <Navbar cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
+            <Navbar products={products} cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
             <div className="row">
 
               {userProducts && userProducts.map((data, index) => (
@@ -433,7 +430,7 @@ function App() {
 
         <Route path="/cart" element={
           <>
-            <Navbar cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
+            <Navbar products={products} cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
             <div className="row">
               {
                 loggedin ?
@@ -458,13 +455,13 @@ function App() {
                   </>
                   :
                   <>
-                          <div className="box">
-                            <p>You are not logged in please log in to view your Cart Items</p>
-                            <div className='column'>
-                            <Link to="/signin">Sign in</Link>
-                            <Link to="/signup">Sign up</Link>
-                            </div>
-                          </div>
+                    <div className="box">
+                      <p>You are not logged in please log in to view your Cart Items</p>
+                      <div className='column'>
+                        <Link to="/signin">Sign in</Link>
+                        <Link to="/signup">Sign up</Link>
+                      </div>
+                    </div>
                   </>
               }
 
@@ -477,7 +474,7 @@ function App() {
           <React.Fragment key={index}>
             <Route path={`/${product.id}`} element={
               <>
-                <Navbar cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
+                <Navbar products={products} cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
                 <ProductDetail images={product.images} name={product.name} desc={product.desc} />
                 <Footer />
               </>} />
