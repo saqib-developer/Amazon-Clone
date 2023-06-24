@@ -11,18 +11,21 @@
 }
 
 .box {
-  background: #ffb74c;
   padding: 16px 85px;
   border-radius: 6px;
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 1.2em;
+  color: black;
+  font-weight: bolder;
+  font-size: x-large;
+  margin: 100px 0;
 }
 
 .box a {
-  background: #62bdff;
+  font-size: 0.8em;
+  background: #ffa5009e;
   padding: 6px 15px;
   border-radius: 5px;
   margin: 0 20px;
