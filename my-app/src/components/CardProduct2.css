@@ -1,0 +1,31 @@
+.CardProduct2 {
+    height: 100px;
+    display: flex;
+    background-color: white;
+    margin: 13px 0px;
+    padding: 8px;
+    border: 1.3px solid grey;
+    border-radius: 11px;
+    box-shadow: -2px -2px 6px 0px #939393;
+}
+
+.CardProduct2 img {
+    height: 90%;
+    margin-right: 20px;
+}
+
+.CardProduct2 p {
+    width: 883px;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.CardProduct2 button {
+
+    background: orange;
+    color: white;
+    border-radius: 6px;
+    padding: 8px 8px;
+}

@@ -39,6 +39,7 @@ import {
 import SellSomething from './components/SellSomething';
 import { v4 as uuidv4 } from 'uuid';
 import ProductDetail from './components/ProductDetail';
+import CardProduct2 from './components/CardProduct2';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -403,7 +404,7 @@ function App() {
 
               {products && products.map((data, index) => (
                 <React.Fragment key={index}>
-                    <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
+                  <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
                 </React.Fragment>
               ))}
             </div>
@@ -435,11 +436,14 @@ function App() {
                     {
                       userCart.length !== 0 ?
                         <>
-                          {userCart && userCart.map((data, index) => (
-                            <React.Fragment key={index}>
-                              <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
-                            </React.Fragment>
-                          ))}
+                          <div style={{ width: '89%' }}>
+                            {userCart && userCart.map((data, index) => (
+                              <React.Fragment key={index}>
+                                <CardProduct2 id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
+                              </React.Fragment>
+                            ))}
+                          </div>
+                          {/* Check out button */}
                         </>
                         :
                         <>
