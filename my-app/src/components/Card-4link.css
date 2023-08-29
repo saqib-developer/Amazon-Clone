@@ -1,4 +1,4 @@
-.card4link{
+.card4link {
     background-color: white;
     padding: 10px;
     box-shadow: 0 0 8px #a2a2a2;
@@ -6,21 +6,27 @@
     margin: 43px 11px;
 }
 
-.coloumn{
+.coloumn {
     display: flex;
     flex-direction: column;
     color: #0F1111;
     margin: 10px;
 }
 
-.coloumn:hover{
+.coloumn:hover {
     color: #0F1111;
     text-decoration: none;
 }
 
-.card4link img{
+.card4link img {
     width: 100px;
+    transition: all 0.5s;
 }
-.card4link a{
+
+.card4link img:hover {
+    transform: scale(1.1);
+}
+
+.card4link a {
     font-size: 0.75em;
 }

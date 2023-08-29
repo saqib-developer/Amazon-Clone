@@ -351,6 +351,28 @@ function App() {
     console.log('Product successfully saved');
   }
 
+  const removeFromCart = async (productId) => {
+    // Fetch existing data
+    const snapshot = await get(databaseRef(db, `users/${userUid}/cart`));
+
+    // Get the current data value or initialize an empty array if it doesn't exist
+    const currentData = snapshot.exists() ? snapshot.val() : [];
+
+    // Find the index of the product in the current cart
+    const index = currentData.indexOf(productId);
+
+    // If the product is found, remove it from the array
+    if (index !== -1) {
+      currentData.splice(index, 1);
+    }
+
+    // Save the updated data to the database
+    await set(databaseRef(db, `users/${userUid}/cart`), currentData);
+
+    console.log('Product successfully removed from cart');
+    window.location.href = '/';
+  }
+
   return (
     <Router>
 
@@ -383,7 +405,7 @@ function App() {
               <Card1link title={'Health and beauty'} />
               <Card1link title={'Pet supplies'} />
               <Card1link title={'Books and media'} />
-              <Card1link title={'Shop all'} />
+              <Card1link title={'View All'} />
             </div>
           </div>
           <Footer />
@@ -439,7 +461,7 @@ function App() {
                           <div style={{ width: '89%' }}>
                             {userCart && userCart.map((data, index) => (
                               <React.Fragment key={index}>
-                                <CardProduct2 id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
+                                <CardProduct2 removeFromCart={removeFromCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
                               </React.Fragment>
                             ))}
                           </div>
