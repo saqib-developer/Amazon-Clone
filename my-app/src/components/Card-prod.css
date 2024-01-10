@@ -1,32 +1,42 @@
-.card{
-    background-color: white;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    width: 250px;
-    box-shadow: 0 0 5px #b0b0b0;
-    border-radius: 7px;
-    margin: 21px 4px;
+.card {
+  background-color: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  box-shadow: 0 0 5px #b0b0b0;
+  border-radius: 7px;
+  margin: 21px 4px;
 }
 
-.card img{
-    width: 95%;
-    margin: 0 auto;
+.card img {
+  width: 95%;
+  margin: 0 auto;
 }
 
-.container{
-    display: flex;
-    justify-content: space-between;
+.card p {
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  padding: 5px;
+  text-overflow: ellipsis;
 }
 
-.addtocart{
-    background-color: white;
-    width: 33px;
-    box-shadow: 0 0 6px 0px #ff9900;
-    border-radius: 4px;
-    transition: all 0.8s;
+.container {
+  display: flex;
+  justify-content: space-between;
 }
 
-.addtocart:hover{
-    box-shadow: 0 0 10px 2px #ff9900;
+.addtocart {
+  background-color: white;
+  width: 33px;
+  box-shadow: 0 0 6px 0px #ff9900;
+  border-radius: 4px;
+  transition: all 0.8s;
+}
+
+.addtocart:hover {
+  box-shadow: 0 0 10px 2px #ff9900;
 }

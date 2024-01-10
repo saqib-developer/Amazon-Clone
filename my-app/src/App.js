@@ -1,50 +1,26 @@
-import './App.css';
-import React, { useState, useEffect } from 'react'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from 'react-router-dom';
-import Card1link from './components/Card-1link';
-import Card4link from './components/Card-4link';
-import CardProd from './components/Card-prod';
-import Navbar from './components/Navbar';
-import ImgSlider from './components/ImgSlider';
-import Footer from './components/Footer';
-import Login from './components/Login';
+import "./App.css";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Card1link from "./components/Card-1link";
+import Card4link from "./components/Card-4link";
+import CardProd from "./components/Card-prod";
+import Navbar from "./components/Navbar";
+import ImgSlider from "./components/ImgSlider";
+import Footer from "./components/Footer";
+import Login from "./components/Login";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import {
-  AuthErrorCodes,
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut
-} from 'firebase/auth';
-import {
-  getDatabase,
-  ref as databaseRef,
-  get,
-  set
-} from 'firebase/database';
-import {
-  getStorage,
-  ref as storageRef,
-  getDownloadURL,
-  uploadBytesResumable
-} from "firebase/storage";
+import { AuthErrorCodes, getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { getDatabase, ref as databaseRef, get, set } from "firebase/database";
+import { getStorage, ref as storageRef, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 
-import SellSomething from './components/SellSomething';
-import { v4 as uuidv4 } from 'uuid';
-import ProductDetail from './components/ProductDetail';
-import CardProduct2 from './components/CardProduct2';
-
+import SellSomething from "./components/SellSomething";
+import { v4 as uuidv4 } from "uuid";
+import ProductDetail from "./components/ProductDetail";
+import CardProduct2 from "./components/CardProduct2";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-
 
 function App() {
   // Your web app's Firebase configuration
@@ -56,137 +32,143 @@ function App() {
     storageBucket: "clone-261bf.appspot.com",
     messagingSenderId: "205617641480",
     appId: "1:205617641480:web:0ca15ff9e6f1cfa84279bd",
-    measurementId: "G-112YCVJJN9"
+    measurementId: "G-112YCVJJN9",
   };
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app)
+  const auth = getAuth(app);
   const db = getDatabase(app);
   const storage = getStorage(app);
 
-  const [loggedin, setLoggedin] = useState(false)
+  const [loggedin, setLoggedin] = useState(false);
 
   // console.log(uuidv4())
   const sliderImages = [
-    'img/sliderimages/1.jpg',
-    'img/sliderimages/2.jpg',
-    'img/sliderimages/3.jpg',
-    'img/sliderimages/4.jpg',
-    'img/sliderimages/5.jpg',
-  ]
+    "img/sliderimages/1.jpg",
+    "img/sliderimages/2.jpg",
+    "img/sliderimages/3.jpg",
+    "img/sliderimages/4.jpg",
+    "img/sliderimages/5.jpg",
+  ];
 
   const showLoginError = (error) => {
-    document.getElementById('loginpassword').style.border = '1.5px solid red'
+    document.getElementById("loginpassword").style.border = "1.5px solid red";
     if (error.code === AuthErrorCodes.INVALID_PASSWORD) {
-      document.getElementById('showError').innerHTML = 'Wrong Password. Try again'
+      document.getElementById("showError").innerHTML = "Wrong Password. Try again";
     } else {
-      document.getElementById('showError').innerHTML = `Error: ${error.message}`
+      document.getElementById("showError").innerHTML = `Error: ${error.message}`;
     }
     setTimeout(() => {
-      document.getElementById('showError').innerHTML = '';
-      document.getElementById('loginpassword').style.border = '1.5px solid grey'
+      document.getElementById("showError").innerHTML = "";
+      document.getElementById("loginpassword").style.border = "1.5px solid grey";
     }, 6000);
-  }
+  };
 
   const loginEmailPassword = async (event) => {
     event.preventDefault();
-    const signinEmail = document.getElementById('loginemail').value
-    const signinPassword = document.getElementById('loginpassword').value
+    const signinEmail = document.getElementById("loginemail").value;
+    const signinPassword = document.getElementById("loginpassword").value;
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, signinEmail, signinPassword)
-      console.log(userCredential.user)
-      window.location.href = '/';
+      const userCredential = await signInWithEmailAndPassword(auth, signinEmail, signinPassword);
+      console.log(userCredential.user);
+      window.location.href = "/";
     } catch (error) {
       console.log(error);
       showLoginError(error);
     }
-  }
+  };
 
   const createAccount = async (event) => {
     event.preventDefault();
-    const signinName = document.getElementById('loginname').value
-    const signinEmail = document.getElementById('loginemail').value
-    const signinPassword = document.getElementById('loginpassword').value
+    const signinName = document.getElementById("loginname").value;
+    const signinEmail = document.getElementById("loginemail").value;
+    const signinPassword = document.getElementById("loginpassword").value;
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, signinEmail, signinPassword)
-
-      set(databaseRef(db, 'users/' + userCredential.user.uid), {
+      
+      const userCredential = await createUserWithEmailAndPassword(auth, signinEmail, signinPassword);
+      set(databaseRef(db, "users/" + userCredential.user.uid), {
         name: signinName,
-        email: signinEmail
+        email: signinEmail,
       })
         .then(() => {
-          console.log('User data successfully saved')
+          console.log("User data successfully saved");
         })
         .catch((error) => {
-          console.log('error: ' + error)
+          console.log("error: " + error);
         });
 
-      window.location.href = '/';
+        window.location.href = "/";
     } catch (error) {
       console.log(error);
       showLoginError(error);
     }
-  }
-  const [name, setName] = useState('Sign in')
-  const [userUid, setUserUid] = useState(null)
+  };
+  const [name, setName] = useState("Sign in");
+  const [userUid, setUserUid] = useState(null);
   const monitorAuthState = async () => {
-    onAuthStateChanged(auth, user => {
+    onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUserUid(user.uid)
+        setUserUid(user.uid);
         // console.log(user)
         setLoggedin(true);
-        get(databaseRef(db, 'users/' + user.uid)).then((snapshot) => {
-          setName(snapshot.val().name)
-        }).catch((error) => {
-
-          console.error(error);
-        });
+        get(databaseRef(db, "users/" + user.uid))
+          .then((snapshot) => {
+            setName(snapshot.val().name);
+            // console.log(name);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       } else {
-        userUid(null)
-        setName('Sign in')
+        userUid(null);
+        setName("Sign in");
         setLoggedin(false);
 
-        console.log('You are not Logged in.')
+        console.log("You are not Logged in.");
       }
-    })
-  }
+    });
+  };
   monitorAuthState();
 
   const logout = async () => {
     await signOut(auth);
-  }
+  };
 
-  const [products, setProducts] = useState()
+  const [products, setProducts] = useState();
 
   useEffect(() => {
-    get(databaseRef(db, 'products')).then((snapshot) => {
-      let updateProducts = [];
-      for (const index in snapshot.val()) {
-        updateProducts.push(snapshot.val()[index]);
-      }
-      setProducts(updateProducts);
-    }).catch((error) => {
-      console.error(error);
-    });
+    get(databaseRef(db, "products"))
+      .then((snapshot) => {
+        let updateProducts = [];
+        for (const index in snapshot.val()) {
+          updateProducts.push(snapshot.val()[index]);
+        }
+        setProducts(updateProducts);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, [db]);
 
   const postAdd = async (event) => {
     event.preventDefault();
-    document.getElementById('submit-button').disabled = true;
+    document.getElementById("submit-button").disabled = true;
 
     const productId = uuidv4();
-    const name = document.getElementById('title').value;
-    const desc = document.getElementById('description').value;
-    const category = document.getElementById('category').value;
-    const price = document.getElementById('price').value;
-    const file1 = document.getElementById('file1').files[0];
-    const file2 = document.getElementById('file2').files[0];
-    const file3 = document.getElementById('file3').files[0];
-    const file4 = document.getElementById('file4').files[0];
-    const file5 = document.getElementById('file5').files[0];
+    const name = document.getElementById("title").value;
+    const desc = document.getElementById("description").value;
+    const category = document.getElementById("category").value;
+    const price = document.getElementById("price").value;
+    const file1 = document.getElementById("file1").files[0];
+    const file2 = document.getElementById("file2").files[0];
+    const file3 = document.getElementById("file3").files[0];
+    const file4 = document.getElementById("file4").files[0];
+    const file5 = document.getElementById("file5").files[0];
 
-    console.log(`Name: ${name}, Description: ${desc}, Category: ${category}, Price: ${price}, File1: ${file1}, File2: ${file2}, File3: ${file3}, File4: ${file4}, File5: ${file5}`);
+    console.log(
+      `Name: ${name}, Description: ${desc}, Category: ${category}, Price: ${price}, File1: ${file1}, File2: ${file2}, File3: ${file3}, File4: ${file4}, File5: ${file5}`
+    );
 
     try {
       // Uploading Images
@@ -210,13 +192,7 @@ function App() {
       const uploadTask5 = uploadBytesResumable(storageRef5, file5, metadata);
 
       // Wait for all image upload tasks to complete
-      const uploadPromises = [
-        uploadTask1,
-        uploadTask2,
-        uploadTask3,
-        uploadTask4,
-        uploadTask5,
-      ];
+      const uploadPromises = [uploadTask1, uploadTask2, uploadTask3, uploadTask4, uploadTask5];
       await Promise.all(uploadPromises);
 
       // Fetch the download URLs of the uploaded images
@@ -229,16 +205,10 @@ function App() {
       ]);
 
       // Create an object with the image filenames (without extensions) as keys and their download URLs as values
-      const imagesData = [
-        downloadURLs[0],
-        downloadURLs[1],
-        downloadURLs[2],
-        downloadURLs[3],
-        downloadURLs[4],
-      ];
+      const imagesData = [downloadURLs[0], downloadURLs[1], downloadURLs[2], downloadURLs[3], downloadURLs[4]];
 
       // Save the data, including the download links, to the Realtime Database
-      await set(databaseRef(db, 'products/' + productId), {
+      await set(databaseRef(db, "products/" + productId), {
         name: name,
         desc: desc,
         category: category,
@@ -259,13 +229,12 @@ function App() {
       // Save the updated data to the database
       await set(databaseRef(db, `users/${userUid}/youradds`), newData);
 
-      console.log('Product successfully saved');
-      window.location.href = '/';
-
+      console.log("Product successfully saved");
+      window.location.href = "/";
     } catch (error) {
-      console.error('Error uploading images:', error);
+      console.error("Error uploading images:", error);
     }
-  }
+  };
 
   let [userProducts, setUserProducts] = useState();
 
@@ -312,23 +281,25 @@ function App() {
     let temp = [];
     get(databaseRef(db, `users/${userUid}/cart`))
       .then((snapshot) => {
-        const promises = snapshot.val().map((element) => {
-          return getItem(element)
-            .then((value) => {
-              temp.push(value);
+        if (snapshot.val()) {
+          const promises = snapshot.val().map((element) => {
+            return getItem(element)
+              .then((value) => {
+                temp.push(value);
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          });
+
+          Promise.all(promises)
+            .then(() => {
+              setUserCart(temp);
             })
             .catch((error) => {
               console.error(error);
             });
-        });
-
-        Promise.all(promises)
-          .then(() => {
-            setUserCart(temp);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -348,8 +319,8 @@ function App() {
     // Save the updated data to the database
     await set(databaseRef(db, `users/${userUid}/cart`), newData);
 
-    console.log('Product successfully saved');
-  }
+    console.log("Product successfully saved");
+  };
 
   const removeFromCart = async (productId) => {
     // Fetch existing data
@@ -369,142 +340,159 @@ function App() {
     // Save the updated data to the database
     await set(databaseRef(db, `users/${userUid}/cart`), currentData);
 
-    console.log('Product successfully removed from cart');
-    window.location.href = '/';
-  }
+    console.log("Product successfully removed from cart");
+    // window.location.href = '/';
+  };
 
   return (
     <Router>
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <>
+              <Navbar products={products} cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
+              <ImgSlider images={sliderImages} />
+              <div className="body">
+                <div className="row">
+                  <Card4link title={"Electronics"} name1={"Headsets"} name2={"Airpods"} name3={"Iphone 14"} name4={"Camera"} />
+                  <Card4link title={"Sports and outdoor"} name1={"Football"} name2={"Watch"} name3={"Drones"} name4={"Binoculars"} />
+                  <Card4link title={"Toys and games"} name1={"Chairs"} name2={"CPU"} name3={"Spinner"} name4={"Playstation"} />
+                  <Card1link title={"Clothing and accessories"} />
+                  <Card1link title={"Home and garden"} />
+                  <Card1link title={"Health and beauty"} />
+                  <Card1link title={"Pet supplies"} />
+                  <Card1link title={"Books and media"} />
+                  <Card1link title={"View All"} />
+                </div>
+              </div>
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/signin"
+          element={
+            <>
+              <Login purpose={"Sign in"} account={loginEmailPassword} />
+            </>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <>
+              <Login purpose={"Create Account"} account={createAccount} />
+            </>
+          }
+        />
+        <Route
+          path="/sellsomething"
+          element={
+            <>
+              <SellSomething postAdd={postAdd} loggedin={loggedin} />
+            </>
+          }
+        />
+        <Route
+          path="/all"
+          element={
+            <>
+              <Navbar products={products} cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
+              <div className="row">
+                {products &&
+                  products.map((data, index) => (
+                    <React.Fragment key={index}>
+                      <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
+                    </React.Fragment>
+                  ))}
+              </div>
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/useradds"
+          element={
+            <>
+              <Navbar products={products} cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
+              <div className="row">
+                {userProducts &&
+                  userProducts.map((data, index) => (
+                    <React.Fragment key={index}>
+                      <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
+                    </React.Fragment>
+                  ))}
+              </div>
+              <Footer />
+            </>
+          }
+        />
 
-      <Routes >
-        <Route exact path="/" element={<>
-          <Navbar products={products} cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
-          <ImgSlider images={sliderImages} />
-          <div className='body'>
-            <div className="row">
-              <Card4link
-                title={'Electronics'}
-                name1={'Headsets'}
-                name2={'Airpods'}
-                name3={'Iphone 14'}
-                name4={'Camera'} />
-              <Card4link
-                title={'Sports and outdoor'}
-                name1={'Football'}
-                name2={'Watch'}
-                name3={'Drones'}
-                name4={'Binoculars'} />
-              <Card4link
-                title={'Toys and games'}
-                name1={'Chairs'}
-                name2={'CPU'}
-                name3={'Spinner'}
-                name4={'Playstation'} />
-              <Card1link title={'Clothing and accessories'} />
-              <Card1link title={'Home and garden'} />
-              <Card1link title={'Health and beauty'} />
-              <Card1link title={'Pet supplies'} />
-              <Card1link title={'Books and media'} />
-              <Card1link title={'View All'} />
-            </div>
-          </div>
-          <Footer />
-        </>} />
-        <Route path="/signin" element={<>
-          <Login purpose={'Sign in'} account={loginEmailPassword} />
-        </>} />
-        <Route path="/signup" element={<>
-          <Login purpose={'Create Account'} account={createAccount} />
-        </>} />
-        <Route path="/sellsomething" element={<>
-          <SellSomething postAdd={postAdd} loggedin={loggedin} />
-        </>} />
-        <Route path="/all" element={
-          <>
-            <Navbar products={products} cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
-            <div className="row">
-
-              {products && products.map((data, index) => (
-                <React.Fragment key={index}>
-                  <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
-                </React.Fragment>
-              ))}
-            </div>
-            <Footer />
-          </>
-        } />
-        <Route path="/useradds" element={
-          <>
-            <Navbar products={products} cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
-            <div className="row">
-
-              {userProducts && userProducts.map((data, index) => (
-                <React.Fragment key={index}>
-                  <CardProd addToCart={addToCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
-                </React.Fragment>
-              ))}
-            </div>
-            <Footer />
-          </>
-        } />
-
-        <Route path="/cart" element={
-          <>
-            <Navbar products={products} cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
-            <div className="row">
-              {
-                loggedin ?
+        <Route
+          path="/cart"
+          element={
+            <>
+              <Navbar products={products} cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
+              <div className="row">
+                {loggedin ? (
                   <>
-                    {
-                      userCart.length !== 0 ?
-                        <>
-                          <div style={{ width: '89%' }}>
-                            {userCart && userCart.map((data, index) => (
+                    {userCart.length !== 0 ? (
+                      <>
+                        <div style={{ width: "89%" }}>
+                          {userCart &&
+                            userCart.map((data, index) => (
                               <React.Fragment key={index}>
                                 <CardProduct2 removeFromCart={removeFromCart} id={data.id} name={data.name} desc={data.desc} src={data.images[0]} />
                               </React.Fragment>
                             ))}
-                          </div>
-                          {/* Check out button */}
-                        </>
-                        :
-                        <>
-                          <div className="box">
-                            <p>There is no item in your Cart to Show</p>
-                            <Link to="/all">Shop Now</Link>
-                          </div>
-                        </>
-                    }
+                        </div>
+                        {/* Check out button */}
+                      </>
+                    ) : (
+                      <>
+                        <div className="box">
+                          <p>There is no item in your Cart to Show</p>
+                          <Link to="/all">Shop Now</Link>
+                        </div>
+                      </>
+                    )}
                   </>
-                  :
+                ) : (
                   <>
                     <div className="box">
                       <p>You are not logged in please log in to view your Cart Items</p>
-                      <div className='column'>
+                      <div className="column">
                         <Link to="/signin">Sign in</Link>
                         <Link to="/signup">Sign up</Link>
                       </div>
                     </div>
                   </>
-              }
+                )}
+              </div>
+              <Footer />
+            </>
+          }
+        />
 
-            </div>
-            <Footer />
-          </>
-        } />
-
-        {products && products.map((product, index) => (
-          <React.Fragment key={index}>
-            <Route path={`/${product.id}`} element={
-              <>
-                <Navbar products={products} cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
-                <ProductDetail images={product.images} name={product.name} desc={product.desc} />
-                <Footer />
-              </>} />
-          </React.Fragment>
-        ))}
-      </Routes >
-    </Router >
+        {products &&
+          products.map((product, index) => (
+            <React.Fragment key={index}>
+              <Route
+                path={`/${product.id}`}
+                element={
+                  <>
+                    <Navbar products={products} cartLength={userCart.length} logout={logout} name={name} loggedin={loggedin} />
+                    <ProductDetail images={product.images} name={product.name} desc={product.desc} />
+                    <Footer />
+                  </>
+                }
+              />
+            </React.Fragment>
+          ))}
+      </Routes>
+    </Router>
   );
 }
 
